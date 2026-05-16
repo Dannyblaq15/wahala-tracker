@@ -4,16 +4,12 @@ import React, { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import WahalaForm from '@/components/WahalaForm'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Trash2, RefreshCw, AlertTriangle, Users, Database, Lock, Key, Edit3, Plus, X } from 'lucide-react'
+import { Shield, Trash2, RefreshCw, AlertTriangle, Users, Database, Edit3, Plus, X } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 
 export default function AdminPage() {
   const [wahalas, setWahalas] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [isAuthorized, setIsAuthorized] = useState(true)
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [isChecking, setIsChecking] = useState(false)
   const [stats, setStats] = useState({
     totalLogs: 0,
     avgSeverity: 0,
@@ -27,11 +23,6 @@ export default function AdminPage() {
   useEffect(() => {
     fetchAdminData()
   }, [])
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // Authentication removed
-  }
 
   const fetchAdminData = async () => {
     setLoading(true)
