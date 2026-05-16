@@ -6,12 +6,11 @@ import WahalaForm from '@/components/WahalaForm'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Trash2, RefreshCw, AlertTriangle, Users, Database, Lock, Key, Edit3, Plus, X } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
-import { verifyAdminPassword } from '@/app/actions/admin'
 
 export default function AdminPage() {
   const [wahalas, setWahalas] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [isAuthorized, setIsAuthorized] = useState(false)
+  const [isAuthorized, setIsAuthorized] = useState(true)
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isChecking, setIsChecking] = useState(false)
@@ -26,28 +25,12 @@ export default function AdminPage() {
   const supabase = createClient()
 
   useEffect(() => {
-    if (isAuthorized) {
-      fetchAdminData()
-    }
-  }, [isAuthorized])
+    fetchAdminData()
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsChecking(true)
-    
-    try {
-      const authorized = await verifyAdminPassword(password)
-      if (authorized) {
-        setIsAuthorized(true)
-        setError('')
-      } else {
-        setError('Invalid Admin Password. Access Denied.')
-      }
-    } catch (err) {
-      setError('An error occurred during authorization.')
-    } finally {
-      setIsChecking(false)
-    }
+    // Authentication removed
   }
 
   const fetchAdminData = async () => {
@@ -99,46 +82,6 @@ export default function AdminPage() {
     setIsFormOpen(false)
     setEditingWahala(null)
     fetchAdminData()
-  }
-
-  if (!isAuthorized) {
-    return (
-      <main className="container flex-center" style={{ minHeight: '100vh' }}>
-        <motion.div 
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="glass-card" 
-          style={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}
-        >
-          <div style={{ background: 'var(--error)', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-            <Lock color="white" size={30} />
-          </div>
-          <h2 style={{ marginBottom: '0.5rem' }}>Admin Access</h2>
-          <p style={{ opacity: 0.6, fontSize: '0.9rem', marginBottom: '2rem' }}>This area is restricted to the system owner.</p>
-          
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ position: 'relative' }}>
-              <Key size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }} />
-              <input 
-                type="password" 
-                placeholder="Enter Admin Password" 
-                style={{ width: '100%', paddingLeft: '3rem' }}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </div>
-            {error && <p style={{ color: 'var(--error)', fontSize: '0.8rem' }}>{error}</p>}
-            <button 
-              disabled={isChecking}
-              className="btn-primary" 
-              style={{ width: '100%', background: 'var(--error)' }}
-            >
-              {isChecking ? 'Verifying...' : 'Authorize Entry'}
-            </button>
-          </form>
-        </motion.div>
-      </main>
-    )
   }
 
   return (
