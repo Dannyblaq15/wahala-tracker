@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server'
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const cookieStore = await cookies()
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +26,7 @@ export async function PATCH(
   const { data, error } = await supabase
     .from('wahalas')
     .update({ title, description, severity, category, mood })
-    .eq('id', params.id)
+    .eq('id', id)
     .select()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
@@ -34,8 +35,9 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const cookieStore = await cookies()
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -52,7 +54,7 @@ export async function DELETE(
   const { error } = await supabase
     .from('wahalas')
     .delete()
-    .eq('id', params.id)
+    .eq('id', id)
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ message: 'Wahala deleted' })
