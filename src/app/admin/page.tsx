@@ -16,12 +16,34 @@ export default function AdminPage() {
   })
   const [editingWahala, setEditingWahala] = useState<any>(null)
   const [isFormOpen, setIsFormOpen] = useState(false)
+  
+  const [activeTab, setActiveTab] = useState<'wahalas' | 'users'>('wahalas')
+  const [users, setUsers] = useState<any[]>([])
+  const [loadingUsers, setLoadingUsers] = useState(true)
 
   const supabase = createClient()
 
   useEffect(() => {
     fetchAdminData()
+    fetchUsersData()
   }, [])
+
+  const fetchUsersData = async () => {
+    setLoadingUsers(true)
+    try {
+      const res = await fetch('/api/admin/users')
+      if (res.ok) {
+        const data = await res.json()
+        setUsers(data)
+      } else {
+        console.error('Failed to fetch users')
+      }
+    } catch (err) {
+      console.error('Admin fetch users error:', err)
+    } finally {
+      setLoadingUsers(false)
+    }
+  }
 
   const fetchAdminData = async () => {
     setLoading(true)
@@ -87,29 +109,66 @@ export default function AdminPage() {
               <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>Manage system data and monitor global wahala levels.</p>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div className="admin-header-actions" style={{ display: 'flex', gap: '1rem' }}>
+            {activeTab === 'wahalas' && (
+              <button 
+                onClick={() => {
+                  setEditingWahala(null)
+                  setIsFormOpen(true)
+                }}
+                className="btn-primary" 
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                <Plus size={18} />
+                Create New
+              </button>
+            )}
             <button 
-              onClick={() => {
-                setEditingWahala(null)
-                setIsFormOpen(true)
-              }}
-              className="btn-primary" 
-              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-            >
-              <Plus size={18} />
-              Create New
-            </button>
-            <button 
-              onClick={fetchAdminData}
+              onClick={activeTab === 'wahalas' ? fetchAdminData : fetchUsersData}
               className="btn-outline" 
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
-              <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
+              <RefreshCw size={18} className={(activeTab === 'wahalas' ? loading : loadingUsers) ? 'animate-spin' : ''} />
               Refresh Data
             </button>
           </div>
         </div>
 
+        <div className="admin-tabs" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem' }}>
+          <button 
+            onClick={() => setActiveTab('wahalas')}
+            style={{ 
+              background: activeTab === 'wahalas' ? 'var(--glass)' : 'transparent',
+              border: activeTab === 'wahalas' ? '1px solid var(--glass-border)' : '1px solid transparent',
+              padding: '0.5rem 1rem',
+              borderRadius: '8px',
+              color: activeTab === 'wahalas' ? 'var(--primary)' : 'var(--foreground)',
+              cursor: 'pointer',
+              fontWeight: activeTab === 'wahalas' ? 'bold' : 'normal',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            Wahala Logs
+          </button>
+          <button 
+            onClick={() => setActiveTab('users')}
+            style={{ 
+              background: activeTab === 'users' ? 'var(--glass)' : 'transparent',
+              border: activeTab === 'users' ? '1px solid var(--glass-border)' : '1px solid transparent',
+              padding: '0.5rem 1rem',
+              borderRadius: '8px',
+              color: activeTab === 'users' ? 'var(--primary)' : 'var(--foreground)',
+              cursor: 'pointer',
+              fontWeight: activeTab === 'users' ? 'bold' : 'normal',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            Users ({users.length})
+          </button>
+        </div>
+
+        {activeTab === 'wahalas' ? (
+          <>
         {/* Admin Stats Grid */}
         <div className="grid-auto" style={{ marginBottom: '3rem' }}>
           <div className="glass-card" style={{ borderLeft: '4px solid var(--primary)' }}>
@@ -262,6 +321,56 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.wahalas;`);
             </div>
           )}
         </div>
+          </>
+        ) : (
+          <div className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+            <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--glass-border)' }}>
+              <h3 style={{ margin: 0 }}>Registered Users</h3>
+            </div>
+            
+            {loadingUsers ? (
+              <div style={{ padding: '3rem', textAlign: 'center' }}>
+                <RefreshCw size={24} className="animate-spin" style={{ margin: '0 auto', opacity: 0.5 }} />
+              </div>
+            ) : users.length === 0 ? (
+              <div style={{ padding: '3rem', textAlign: 'center' }}>
+                <p style={{ opacity: 0.6 }}>No users found.</p>
+              </div>
+            ) : (
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                  <thead>
+                    <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--glass-border)' }}>
+                      <th style={{ padding: '1rem' }}>User</th>
+                      <th style={{ padding: '1rem' }}>Email</th>
+                      <th style={{ padding: '1rem' }}>Joined</th>
+                      <th style={{ padding: '1rem' }}>Last Sign In</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((u) => (
+                      <tr key={u.uid} style={{ borderBottom: '1px solid var(--glass-border)' }}>
+                        <td style={{ padding: '1rem' }}>
+                          <div style={{ fontWeight: 'bold' }}>{u.displayName || 'Anonymous'}</div>
+                          <div style={{ fontSize: '0.75rem', opacity: 0.5 }}>{u.uid}</div>
+                        </td>
+                        <td style={{ padding: '1rem', opacity: 0.8 }}>
+                          {u.email}
+                        </td>
+                        <td style={{ padding: '1rem', fontSize: '0.8rem', opacity: 0.7 }}>
+                          {u.creationTime ? new Date(u.creationTime).toLocaleString() : 'N/A'}
+                        </td>
+                        <td style={{ padding: '1rem', fontSize: '0.8rem', opacity: 0.7 }}>
+                          {u.lastSignInTime ? new Date(u.lastSignInTime).toLocaleString() : 'N/A'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Form Modal Overlay */}

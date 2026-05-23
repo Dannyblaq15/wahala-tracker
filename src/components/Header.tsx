@@ -34,7 +34,7 @@ export default function Header() {
   }
 
   return (
-    <header className="glass-card" style={{
+    <header className="glass-card header-container" style={{
       margin: '1rem',
       display: 'flex',
       justifyContent: 'space-between',
@@ -49,28 +49,26 @@ export default function Header() {
         <h1 className="gradient-text" style={{ fontSize: '1.5rem', margin: 0 }}>WahalaTracker</h1>
       </Link>
 
-      <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+      <nav className="header-nav-group" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
         <Link href="/analytics" style={{ color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '0.2rem', textDecoration: 'none' }}>
           <BarChart2 size={20} />
-          <span>Analytics</span>
+          <span className="hide-mobile">Analytics</span>
         </Link>
         {user && user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL && (
           <Link href="/admin" style={{ color: 'var(--error)', display: 'flex', alignItems: 'center', gap: '0.2rem', textDecoration: 'none' }}>
             <Shield size={20} />
-            <span>Admin</span>
+            <span className="hide-mobile">Admin</span>
           </Link>
         )}
         <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
           <Link href="/notifications" style={{ color: 'var(--foreground)' }}>
             <Bell size={20} />
           </Link>
-          <Link href="/profile" style={{ color: 'var(--foreground)' }}>
-            <User size={20} />
-          </Link>
         </div>
         {user ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div
+            <Link
+              href="/profile"
               style={{
                 width: '40px',
                 height: '40px',
@@ -80,11 +78,13 @@ export default function Header() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                color: 'var(--foreground)',
+                textDecoration: 'none'
               }}
               title={user.displayName || user.email || 'User'}
             >
               <User size={20} />
-            </div>
+            </Link>
             <button
               onClick={handleLogout}
               style={{
@@ -99,7 +99,7 @@ export default function Header() {
               }}
             >
               <LogOut size={18} />
-              Logout
+              <span className="hide-mobile">Logout</span>
             </button>
           </div>
         ) : (

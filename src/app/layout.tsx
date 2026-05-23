@@ -12,6 +12,15 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Wahala Tracker | Manage Your Daily Stress",
   description: "A premium Nigerian-style issue tracking system to log your daily challenges and monitor your mood.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png" },
+    ],
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
