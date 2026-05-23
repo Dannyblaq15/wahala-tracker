@@ -18,6 +18,20 @@
   --warning: #FFCC00;
 }
 
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #00C28C; /* brighter teal */
+    --primary-glow: rgba(0, 194, 140, 0.5);
+    --secondary: #FFB300; /* softer amber */
+    --background: #121212;
+    --foreground: #E0E0E0;
+    --card-bg: rgba(0, 0, 0, 0.2);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --glass: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.12);
+  }
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -66,6 +80,7 @@ h1, h2, h3 {
 .gradient-text {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

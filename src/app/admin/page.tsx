@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Header from '@/components/Header'
 import WahalaForm from '@/components/WahalaForm'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Trash2, RefreshCw, AlertTriangle, Users, Database, Edit3, Plus, X } from 'lucide-react'
@@ -77,8 +76,6 @@ export default function AdminPage() {
 
   return (
     <main className="container" style={{ paddingBottom: '4rem' }}>
-      <Header />
-
       <div style={{ marginTop: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>

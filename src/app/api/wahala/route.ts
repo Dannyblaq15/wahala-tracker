@@ -2,11 +2,28 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Sentiment from 'sentiment'
-
+import { adminAuth } from '@/lib/firebaseAdmin'
 
 const sentiment = new Sentiment()
 
+async function getAuthUid() {
+  const cookieStore = await cookies()
+  const sessionCookie = cookieStore.get('session')?.value
+  if (!sessionCookie) return null
+  try {
+    const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie, true)
+    return decodedClaims.uid
+  } catch (error) {
+    return null
+  }
+}
+
 export async function POST(request: Request) {
+  const uid = await getAuthUid()
+  if (!uid) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   const cookieStore = await cookies()
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -43,7 +60,8 @@ export async function POST(request: Request) {
         description: description || '',
         severity: Math.min(5, Math.max(1, parsedSeverity)),
         mood,
-        category: category || 'General'
+        category: category || 'General',
+        user_id: uid
       }
     ])
     .select()
@@ -53,6 +71,11 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  const uid = await getAuthUid()
+  if (!uid) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   const cookieStore = await cookies()
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -69,6 +92,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from('wahalas')
     .select('*')
+    .eq('user_id', uid)
     .order('created_at', { ascending: false })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })

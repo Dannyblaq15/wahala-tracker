@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Header from '@/components/Header'
 import { motion } from 'framer-motion'
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -61,8 +60,6 @@ export default function Analytics() {
 
   return (
     <main className="container" style={{ paddingBottom: '4rem' }}>
-      <Header />
-
       <div style={{ marginTop: '2rem' }}>
         <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Stress <span className="gradient-text">Analytics</span></h2>
         {(!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder')) && (

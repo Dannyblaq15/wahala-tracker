@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Header from '@/components/Header'
 import WahalaForm from '@/components/WahalaForm'
 import WahalaCard from '@/components/WahalaCard'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -65,8 +64,6 @@ export default function Dashboard() {
 
   return (
     <main className="container" style={{ paddingBottom: '4rem' }}>
-      <Header />
-
       <div style={{ maxWidth: '800px', margin: '2rem auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
