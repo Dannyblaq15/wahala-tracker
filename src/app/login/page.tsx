@@ -39,7 +39,31 @@ export default function LoginPage() {
       }
     } catch (err: any) {
       console.error(err);
-      setError(err.message || 'Failed to log in. Please check your credentials.');
+      let friendlyMessage = 'Failed to log in. Please check your credentials.';
+      if (err.code) {
+        switch (err.code) {
+          case 'auth/invalid-credential':
+          case 'auth/wrong-password':
+          case 'auth/user-not-found':
+            friendlyMessage = "Abeg check your email or password again. E be like say something no match! 🤷‍♂️";
+            break;
+          case 'auth/invalid-email':
+            friendlyMessage = "That email format no correct. Please check how you write am.";
+            break;
+          case 'auth/user-disabled':
+            friendlyMessage = "E be like say this account don block. Contact support first.";
+            break;
+          case 'auth/too-many-requests':
+            friendlyMessage = "You don try too many times! Access is locked temporarily. Pls wait small.";
+            break;
+          case 'auth/network-request-failed':
+            friendlyMessage = "Internet network wahala! Check your connection and try again.";
+            break;
+          default:
+            friendlyMessage = err.message || friendlyMessage;
+        }
+      }
+      setError(friendlyMessage);
     } finally {
       setLoading(false);
     }

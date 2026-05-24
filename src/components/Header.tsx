@@ -44,27 +44,31 @@ export default function Header() {
       top: '1rem',
       zIndex: 100,
     }}>
-      <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+      <Link href={user ? "/dashboard" : "/"} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
         <AlertCircle size={32} color="var(--secondary)" />
         <h1 className="gradient-text" style={{ fontSize: '1.5rem', margin: 0 }}>WahalaTracker</h1>
       </Link>
 
       <nav className="header-nav-group" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-        <Link href="/analytics" style={{ color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '0.2rem', textDecoration: 'none' }}>
-          <BarChart2 size={20} />
-          <span className="hide-mobile">Analytics</span>
-        </Link>
-        {user && user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL && (
+        {user && (
+          <Link href="/analytics" style={{ color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '0.2rem', textDecoration: 'none' }}>
+            <BarChart2 size={20} />
+            <span className="hide-mobile">Analytics</span>
+          </Link>
+        )}
+        {user && (user.role === 'admin' || user.role === 'super_admin') && (
           <Link href="/admin" style={{ color: 'var(--error)', display: 'flex', alignItems: 'center', gap: '0.2rem', textDecoration: 'none' }}>
             <Shield size={20} />
             <span className="hide-mobile">Admin</span>
           </Link>
         )}
-        <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
-          <Link href="/notifications" style={{ color: 'var(--foreground)' }}>
-            <Bell size={20} />
-          </Link>
-        </div>
+        {user && (
+          <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
+            <Link href="/notifications" style={{ color: 'var(--foreground)' }}>
+              <Bell size={20} />
+            </Link>
+          </div>
+        )}
         {user ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <Link

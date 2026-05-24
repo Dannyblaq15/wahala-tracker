@@ -3,10 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import WahalaForm from '@/components/WahalaForm'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Trash2, RefreshCw, AlertTriangle, Users, Database, Edit3, Plus, X } from 'lucide-react'
+import { Shield, Trash2, RefreshCw, AlertTriangle, Users, Database, Edit3, Plus, X, Award } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useAuthUser } from '@/hooks/useAuthUser'
+import { useNotification } from '@/components/NotificationProvider'
 
 export default function AdminPage() {
+  const { user, loading: authLoading } = useAuthUser()
+  const { notify } = useNotification()
   const [wahalas, setWahalas] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
@@ -20,8 +24,15 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<'wahalas' | 'users'>('wahalas')
   const [users, setUsers] = useState<any[]>([])
   const [loadingUsers, setLoadingUsers] = useState(true)
+  const [updatingRole, setUpdatingRole] = useState<string | null>(null)
 
   const supabase = createClient()
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      setActiveTab('users')
+    }
+  }, [user])
 
   useEffect(() => {
     fetchAdminData()
@@ -96,6 +107,50 @@ export default function AdminPage() {
     fetchAdminData()
   }
 
+  const handleRoleChange = async (uid: string, newRole: string) => {
+    setUpdatingRole(uid)
+    try {
+      const res = await fetch('/api/admin/users/role', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ uid, role: newRole }),
+      })
+      
+      if (res.ok) {
+        notify('User role updated successfully!', 'success')
+        setUsers(prev => prev.map(u => u.uid === uid ? { ...u, role: newRole } : u))
+      } else {
+        const data = await res.json()
+        notify(data.error || 'Failed to update role', 'error')
+      }
+    } catch (err) {
+      console.error('Role change error:', err)
+      notify('Network error updating role', 'error')
+    } finally {
+      setUpdatingRole(null)
+    }
+  }
+
+  if (authLoading) {
+    return (
+      <div className="flex-center" style={{ minHeight: '100vh' }}>
+        <div className="animate-spin" style={{ width: '50px', height: '50px', border: '4px solid var(--glass-border)', borderTopColor: 'var(--primary)', borderRadius: '50%' }} />
+      </div>
+    )
+  }
+
+  if (!user || (user.role !== 'admin' && user.role !== 'super_admin')) {
+    return (
+      <div className="flex-center" style={{ minHeight: '100vh', flexDirection: 'column', gap: '1rem' }}>
+        <Shield size={48} color="var(--error)" />
+        <h2>Access Denied</h2>
+        <p style={{ opacity: 0.7 }}>You must be an admin to view this page.</p>
+      </div>
+    )
+  }
+
   return (
     <main className="container" style={{ paddingBottom: '4rem' }}>
       <div style={{ marginTop: '2rem' }}>
@@ -105,12 +160,16 @@ export default function AdminPage() {
               <Shield color="white" />
             </div>
             <div>
-              <h2 style={{ fontSize: '2rem', margin: 0 }}>Admin <span className="gradient-text">Control Center</span></h2>
-              <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>Manage system data and monitor global wahala levels.</p>
+              <h2 style={{ fontSize: '2rem', margin: 0 }}>
+                {user.role === 'super_admin' ? 'Super Admin' : 'Admin'} <span className="gradient-text">Control Center</span>
+              </h2>
+              <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
+                {user.role === 'super_admin' ? 'Manage system data and monitor global wahala levels.' : 'Manage user records and track site membership.'}
+              </p>
             </div>
           </div>
           <div className="admin-header-actions" style={{ display: 'flex', gap: '1rem' }}>
-            {activeTab === 'wahalas' && (
+            {activeTab === 'wahalas' && user.role === 'super_admin' && (
               <button 
                 onClick={() => {
                   setEditingWahala(null)
@@ -134,40 +193,74 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div className="admin-tabs" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem' }}>
-          <button 
-            onClick={() => setActiveTab('wahalas')}
-            style={{ 
-              background: activeTab === 'wahalas' ? 'var(--glass)' : 'transparent',
-              border: activeTab === 'wahalas' ? '1px solid var(--glass-border)' : '1px solid transparent',
-              padding: '0.5rem 1rem',
-              borderRadius: '8px',
-              color: activeTab === 'wahalas' ? 'var(--primary)' : 'var(--foreground)',
-              cursor: 'pointer',
-              fontWeight: activeTab === 'wahalas' ? 'bold' : 'normal',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            Wahala Logs
-          </button>
-          <button 
-            onClick={() => setActiveTab('users')}
-            style={{ 
-              background: activeTab === 'users' ? 'var(--glass)' : 'transparent',
-              border: activeTab === 'users' ? '1px solid var(--glass-border)' : '1px solid transparent',
-              padding: '0.5rem 1rem',
-              borderRadius: '8px',
-              color: activeTab === 'users' ? 'var(--primary)' : 'var(--foreground)',
-              cursor: 'pointer',
-              fontWeight: activeTab === 'users' ? 'bold' : 'normal',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            Users ({users.length})
-          </button>
-        </div>
+        {user.role === 'super_admin' && (
+          <div className="admin-tabs" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem' }}>
+            <button 
+              onClick={() => setActiveTab('wahalas')}
+              style={{ 
+                background: activeTab === 'wahalas' ? 'var(--glass)' : 'transparent',
+                border: activeTab === 'wahalas' ? '1px solid var(--glass-border)' : '1px solid transparent',
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                color: activeTab === 'wahalas' ? 'var(--primary)' : 'var(--foreground)',
+                cursor: 'pointer',
+                fontWeight: activeTab === 'wahalas' ? 'bold' : 'normal',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Wahala Logs
+            </button>
+            <button 
+              onClick={() => setActiveTab('users')}
+              style={{ 
+                background: activeTab === 'users' ? 'var(--glass)' : 'transparent',
+                border: activeTab === 'users' ? '1px solid var(--glass-border)' : '1px solid transparent',
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                color: activeTab === 'users' ? 'var(--primary)' : 'var(--foreground)',
+                cursor: 'pointer',
+                fontWeight: activeTab === 'users' ? 'bold' : 'normal',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              Users ({users.length})
+            </button>
+          </div>
+        )}
 
-        {activeTab === 'wahalas' ? (
+        {/* User Stats Grid (For Admin role or when Users tab is selected) */}
+        {activeTab === 'users' && (
+          <div className="grid-auto" style={{ marginBottom: '3rem' }}>
+            <div className="glass-card" style={{ borderLeft: '4px solid var(--primary)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <Users opacity={0.5} />
+                <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--primary)' }}>Membership</span>
+              </div>
+              <h3 style={{ fontSize: '2rem' }}>{users.length}</h3>
+              <p style={{ opacity: 0.6, fontSize: '0.8rem' }}>Total Registered Users</p>
+            </div>
+
+            <div className="glass-card" style={{ borderLeft: '4px solid var(--secondary)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <RefreshCw opacity={0.5} />
+                <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--secondary)' }}>Activity</span>
+              </div>
+              <h3 style={{ fontSize: '2rem' }}>{users.filter(u => u.lastSignInTime).length}</h3>
+              <p style={{ opacity: 0.6, fontSize: '0.8rem' }}>Active Accounts</p>
+            </div>
+
+            <div className="glass-card" style={{ borderLeft: '4px solid var(--error)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <Award opacity={0.5} />
+                <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--error)' }}>Staff</span>
+              </div>
+              <h3 style={{ fontSize: '2rem' }}>{users.filter(u => u.role === 'admin' || u.role === 'super_admin').length}</h3>
+              <p style={{ opacity: 0.6, fontSize: '0.8rem' }}>Administrators</p>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'wahalas' && (
           <>
         {/* Admin Stats Grid */}
         <div className="grid-auto" style={{ marginBottom: '3rem' }}>
@@ -322,7 +415,8 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.wahalas;`);
           )}
         </div>
           </>
-        ) : (
+        )}
+        {activeTab === 'users' && (
           <div className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
             <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--glass-border)' }}>
               <h3 style={{ margin: 0 }}>Registered Users</h3>
@@ -343,6 +437,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.wahalas;`);
                     <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--glass-border)' }}>
                       <th style={{ padding: '1rem' }}>User</th>
                       <th style={{ padding: '1rem' }}>Email</th>
+                      <th style={{ padding: '1rem' }}>Role</th>
                       <th style={{ padding: '1rem' }}>Joined</th>
                       <th style={{ padding: '1rem' }}>Last Sign In</th>
                     </tr>
@@ -356,6 +451,45 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.wahalas;`);
                         </td>
                         <td style={{ padding: '1rem', opacity: 0.8 }}>
                           {u.email}
+                        </td>
+                        <td style={{ padding: '1rem' }}>
+                          {user.role === 'super_admin' ? (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <select
+                                value={u.role || 'basic'}
+                                onChange={(e) => handleRoleChange(u.uid, e.target.value)}
+                                disabled={updatingRole === u.uid}
+                                style={{
+                                  background: 'rgba(255, 255, 255, 0.05)',
+                                  border: '1px solid var(--glass-border)',
+                                  color: 'var(--foreground)',
+                                  padding: '0.3rem 0.5rem',
+                                  borderRadius: '6px',
+                                  fontSize: '0.85rem',
+                                  cursor: 'pointer'
+                                }}
+                              >
+                                <option value="basic">Basic User</option>
+                                <option value="admin">Admin</option>
+                                <option value="super_admin">Super Admin</option>
+                              </select>
+                              {updatingRole === u.uid && (
+                                <RefreshCw size={14} className="animate-spin" style={{ color: 'var(--primary)' }} />
+                              )}
+                            </div>
+                          ) : (
+                            <span style={{
+                              background: u.role === 'super_admin' ? 'rgba(255, 59, 48, 0.15)' : u.role === 'admin' ? 'rgba(255, 140, 0, 0.15)' : 'rgba(255, 255, 255, 0.08)',
+                              color: u.role === 'super_admin' ? 'var(--error)' : u.role === 'admin' ? 'var(--secondary)' : 'var(--foreground)',
+                              padding: '0.2rem 0.5rem',
+                              borderRadius: '4px',
+                              fontSize: '0.8rem',
+                              textTransform: 'capitalize',
+                              border: '1px solid rgba(255,255,255,0.05)'
+                            }}>
+                              {u.role === 'super_admin' ? 'Super Admin' : u.role === 'admin' ? 'Admin' : 'Basic User'}
+                            </span>
+                          )}
                         </td>
                         <td style={{ padding: '1rem', fontSize: '0.8rem', opacity: 0.7 }}>
                           {u.creationTime ? new Date(u.creationTime).toLocaleString() : 'N/A'}

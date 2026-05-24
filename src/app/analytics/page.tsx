@@ -11,8 +11,11 @@ import { TrendingUp, AlertTriangle, Smile } from 'lucide-react'
 export default function Analytics() {
   const [data, setData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  // Prevent recharts from rendering during SSR (avoids width/height=-1 warnings)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
     fetchData()
   }, [])
 
@@ -108,40 +111,44 @@ export default function Analytics() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', marginTop: '2rem' }}>
           <div className="glass-card" style={{ height: '400px' }}>
             <h3 style={{ marginBottom: '1.5rem' }}>Severity Trend</h3>
-            <ResponsiveContainer width="100%" height="90%">
-              <LineChart data={severityTrend}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis dataKey="date" stroke="rgba(255,255,255,0.5)" />
-                <YAxis stroke="rgba(255,255,255,0.5)" />
-                <Tooltip 
-                  contentStyle={{ background: 'var(--background)', border: '1px solid var(--glass-border)', borderRadius: '8px' }}
-                />
-                <Line type="monotone" dataKey="severity" stroke="var(--primary)" strokeWidth={3} dot={{ r: 6, fill: 'var(--primary)' }} />
-              </LineChart>
-            </ResponsiveContainer>
+            {isMounted && (
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={severityTrend}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis dataKey="date" stroke="rgba(255,255,255,0.5)" />
+                  <YAxis stroke="rgba(255,255,255,0.5)" />
+                  <Tooltip 
+                    contentStyle={{ background: 'var(--background)', border: '1px solid var(--glass-border)', borderRadius: '8px' }}
+                  />
+                  <Line type="monotone" dataKey="severity" stroke="var(--primary)" strokeWidth={3} dot={{ r: 6, fill: 'var(--primary)' }} />
+                </LineChart>
+              </ResponsiveContainer>
+            )}
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             <div className="glass-card" style={{ height: '350px' }}>
               <h3 style={{ marginBottom: '1.5rem' }}>Mood Distribution</h3>
-              <ResponsiveContainer width="100%" height="80%">
-                <PieChart>
-                  <Pie
-                    data={moodData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {moodData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
+              {isMounted && (
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie
+                      data={moodData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {moodData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
                 {moodData.map((m, i) => (
                   <div key={m.name} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem' }}>
@@ -154,15 +161,17 @@ export default function Analytics() {
 
             <div className="glass-card" style={{ height: '350px' }}>
               <h3 style={{ marginBottom: '1.5rem' }}>Category Breakdown</h3>
-              <ResponsiveContainer width="100%" height="90%">
-                <BarChart data={categoryData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                  <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" />
-                  <YAxis stroke="rgba(255,255,255,0.5)" />
-                  <Tooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} />
-                  <Bar dataKey="value" fill="var(--secondary)" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+              {isMounted && (
+                <ResponsiveContainer width="100%" height={280}>
+                  <BarChart data={categoryData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                    <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" />
+                    <YAxis stroke="rgba(255,255,255,0.5)" />
+                    <Tooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} />
+                    <Bar dataKey="value" fill="var(--secondary)" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </div>
         </div>

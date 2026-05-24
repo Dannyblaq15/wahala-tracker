@@ -51,7 +51,29 @@ export default function SignupPage() {
       }
     } catch (err: any) {
       console.error(err);
-      setError(err.message || 'Failed to sign up. Please try again.');
+      let friendlyMessage = 'Failed to sign up. Please try again.';
+      if (err.code) {
+        switch (err.code) {
+          case 'auth/email-already-in-use':
+            friendlyMessage = "This email address already has an account. Try logging in instead! 🔑";
+            break;
+          case 'auth/invalid-email':
+            friendlyMessage = "That email format no correct. Please check how you write am.";
+            break;
+          case 'auth/weak-password':
+            friendlyMessage = "Your password too weak. Abeg select a strong password (at least 6 characters).";
+            break;
+          case 'auth/operation-not-allowed':
+            friendlyMessage = "E be like say signups no allowed right now. Contact admin.";
+            break;
+          case 'auth/network-request-failed':
+            friendlyMessage = "Internet network wahala! Check your connection and try again.";
+            break;
+          default:
+            friendlyMessage = err.message || friendlyMessage;
+        }
+      }
+      setError(friendlyMessage);
     } finally {
       setLoading(false);
     }

@@ -50,7 +50,7 @@ export default function NotificationsPage() {
           </ul>
         )}
         <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-          <Link href="/" className="btn-primary" style={{ padding: '0.6rem 1.2rem' }}>Back to Home</Link>
+          <Link href="/dashboard" className="btn-primary" style={{ padding: '0.6rem 1.2rem' }}>Back to Dashboard</Link>
         </div>
       </div>
     </div>

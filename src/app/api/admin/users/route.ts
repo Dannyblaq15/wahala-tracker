@@ -14,10 +14,12 @@ export async function GET() {
     const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie, true);
     
     const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-    const isAdmin = decodedClaims.admin === true || 
-                    (adminEmail && decodedClaims.email === adminEmail);
+    const isAuthorized = decodedClaims.role === 'admin' || 
+                         decodedClaims.role === 'super_admin' || 
+                         decodedClaims.admin === true || 
+                         (adminEmail && decodedClaims.email === adminEmail);
 
-    if (!isAdmin) {
+    if (!isAuthorized) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
@@ -31,6 +33,7 @@ export async function GET() {
       displayName: user.displayName,
       creationTime: user.metadata.creationTime,
       lastSignInTime: user.metadata.lastSignInTime,
+      role: (user.customClaims?.role as string) || (user.email === adminEmail ? 'super_admin' : 'basic')
     }));
 
     // Sort users by creation time descending
