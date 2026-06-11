@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { adminAuth } from '@/lib/firebaseAdmin';
+import { rateLimit } from '@/lib/rateLimit';
 
 export async function POST(request: Request) {
+  // Apply rate limit: max 5 requests per minute per IP
+  const rateLimitResponse = rateLimit(request, { limit: 5, windowMs: 60000 });
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const { idToken } = await request.json();
 

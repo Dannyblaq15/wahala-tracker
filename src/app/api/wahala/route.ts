@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Sentiment from 'sentiment'
 import { adminAuth } from '@/lib/firebaseAdmin'
+import { rateLimit } from '@/lib/rateLimit'
 
 const sentiment = new Sentiment()
 
@@ -19,6 +20,10 @@ async function getAuthUid() {
 }
 
 export async function POST(request: Request) {
+  // Rate limit: Max 15 posts per minute per IP
+  const rateLimitResponse = rateLimit(request, { limit: 15, windowMs: 60000 });
+  if (rateLimitResponse) return rateLimitResponse;
+
   const uid = await getAuthUid()
   if (!uid) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
