@@ -19,7 +19,7 @@
                   "type": "Image",
                   "url": "${appIcon}",
                   "size": "Small",
-                  "style": "RoundedCorners"
+                  "style": "person"
                 }
               ],
               "verticalContentAlignment": "Center"
@@ -64,8 +64,7 @@
                   "type": "TextBlock",
                   "text": "${stressLevel}",
                   "size": "ExtraLarge",
-                  "weight": "Bolder",
-                  "color": "${levelColor}"
+                  "weight": "Bolder"
                 },
                 {
                   "type": "TextBlock",
