@@ -1,7 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { NotificationProvider } from "@/components/NotificationProvider";
 import Header from "@/components/Header";
+import RegisterSW from "@/components/RegisterSW";
+
+export const viewport: Viewport = {
+  themeColor: "#6B21A8",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Wahala Tracker | Manage Your Daily Stress",
@@ -15,6 +22,11 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Wahala Tracker",
+  },
 };
 
 export default function RootLayout({
@@ -25,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <RegisterSW />
         <Header />
         <NotificationProvider>
           {children}

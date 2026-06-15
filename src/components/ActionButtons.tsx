@@ -1,30 +1,65 @@
 'use client';
+
 import React from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { IconButton } from '@/components/IconButton';
 
 interface ActionButtonsProps {
   onLogout: () => void;
 }
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({ onLogout }) => {
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    // Additional logout logic can be placed here if needed
-    onLogout();
-    router.push('/login');
-  };
-
   return (
-    <div className="flex space-x-6">
-      <Link href="/notifications" className="flex items-center gap-2 text-primary hover:underline">
-        <Settings size={20} /> Notification Settings
+    <div style={{
+      display: 'flex',
+      gap: '1rem',
+      flexWrap: 'wrap',
+      marginTop: '1.5rem',
+      justifyContent: 'flex-start'
+    }}>
+      <Link href="/notifications" className="btn-outline" style={{
+        textDecoration: 'none',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        fontSize: '0.95rem',
+        padding: '0.8rem 1.5rem',
+        borderRadius: '12px',
+        transition: 'all 0.3s ease'
+      }}>
+        <Settings size={18} />
+        <span>Notification Settings</span>
       </Link>
-      <button onClick={handleLogout} className="flex items-center gap-2 text-destructive hover:underline">
-        <LogOut size={20} /> Logout
+      
+      <button 
+        onClick={onLogout} 
+        className="btn-outline" 
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontSize: '0.95rem',
+          padding: '0.8rem 1.5rem',
+          borderRadius: '12px',
+          borderColor: 'rgba(255, 59, 48, 0.2)',
+          background: 'rgba(255, 59, 48, 0.04)',
+          color: 'var(--error)',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'var(--error)';
+          e.currentTarget.style.color = '#ffffff';
+          e.currentTarget.style.borderColor = 'var(--error)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 59, 48, 0.04)';
+          e.currentTarget.style.color = 'var(--error)';
+          e.currentTarget.style.borderColor = 'rgba(255, 59, 48, 0.2)';
+        }}
+      >
+        <LogOut size={18} />
+        <span>Logout Session</span>
       </button>
     </div>
   );
