@@ -179,11 +179,13 @@ export default function manifest(): FullManifest {
     iarc_rating_id: "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
 
     // Windows 11 / Microsoft Edge widget
+    // The Adaptive Card template is at /widgets/stress-widget.json
+    // Live data is served from /api/widgets/stress-data
     widgets: [
       {
         name: "Wahala Stress Widget",
         short_name: "Wahala",
-        description: "Quick-glance at your current stress index",
+        description: "Quick-glance at your current daily stress index",
         tag: "wahala-stress-widget",
         url: "/dashboard",
         icons: [
@@ -196,11 +198,14 @@ export default function manifest(): FullManifest {
             label: "Wahala Stress Widget preview",
           },
         ],
+        // Adaptive Cards template (required for Edge/Windows Widgets Board)
         template: "/widgets/stress-widget.json",
         ms_ac_template: "/widgets/stress-widget.json",
-        data: "/widgets/stress-widget-data.json",
+        // Live data endpoint for the template
+        data: "/api/widgets/stress-data",
         type: "application/json",
-        update: 1800, // Update every 30 minutes
+        // Request widget refresh every 30 minutes
+        update: 1800,
       },
     ],
 
@@ -214,11 +219,15 @@ export default function manifest(): FullManifest {
       new_note_url: "/dashboard",
     },
 
-    // Scope extensions (experimental — extend PWA trust to subdomain/domain if deployed)
+    // Scope extensions — each listed origin MUST host
+    // /.well-known/web-app-origin-association to confirm the trust.
+    //
+    // This app's own Vercel deployment is self-hosted so it can serve
+    // the association file (see src/app/.well-known/web-app-origin-association/route.ts).
+    //
+    // Only list origins you CONTROL — wildcards are not supported.
     scope_extensions: [
       { origin: "https://wahala-tracker.vercel.app" },
-      { origin: "https://wahalatracker.com" },
-      { origin: "https://app.wahalatracker.com" },
     ],
   };
 }

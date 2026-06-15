@@ -1,0 +1,114 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "${appIcon}",
+                  "size": "Small",
+                  "style": "RoundedCorners"
+                }
+              ],
+              "verticalContentAlignment": "Center"
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Wahala Tracker",
+                  "weight": "Bolder",
+                  "size": "Small",
+                  "color": "Good"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Today's Stress Index",
+                  "size": "ExtraSmall",
+                  "color": "Light",
+                  "spacing": "None"
+                }
+              ],
+              "verticalContentAlignment": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${stressLevel}",
+                  "size": "ExtraLarge",
+                  "weight": "Bolder",
+                  "color": "${levelColor}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${levelLabel}",
+                  "size": "Small",
+                  "color": "Light",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${entryCount} logs",
+                  "size": "ExtraSmall",
+                  "color": "Light",
+                  "horizontalAlignment": "Right"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${lastUpdated}",
+                  "size": "ExtraSmall",
+                  "color": "Light",
+                  "horizontalAlignment": "Right",
+                  "spacing": "None"
+                }
+              ],
+              "verticalContentAlignment": "Bottom"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Log Wahala",
+      "url": "${appUrl}/dashboard",
+      "style": "positive"
+    }
+  ]
+}
