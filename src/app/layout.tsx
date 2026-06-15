@@ -5,9 +5,10 @@ import Header from "@/components/Header";
 import RegisterSW from "@/components/RegisterSW";
 
 export const viewport: Viewport = {
-  themeColor: "#6B21A8",
+  themeColor: "#008751",
   width: "device-width",
   initialScale: 1,
+  minimumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -18,14 +19,18 @@ export const metadata: Metadata = {
       { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
     ],
   },
-  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "Wahala Tracker",
+    startupImage: ["/apple-touch-icon.png"],
+  },
+  applicationName: "Wahala Tracker",
+  formatDetection: {
+    telephone: false,
   },
 };
 

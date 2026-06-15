@@ -1,7 +1,7 @@
-const CACHE_NAME = 'wahala-tracker-cache-v1';
+const CACHE_NAME = 'wahala-tracker-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
-  '/manifest.json',
+  '/manifest.webmanifest',
   '/favicon.ico',
   '/apple-touch-icon.png',
   '/icon-192.png',
