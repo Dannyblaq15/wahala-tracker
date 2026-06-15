@@ -13,10 +13,11 @@ type FullManifest = MetadataRoute.Manifest & {
     screenshots?: Array<{ src: string; sizes: string; label: string }>;
     description?: string;
     short_name?: string;
+    template?: string;
     ms_ac_template?: string;
     data?: string;
     type?: string;
-    autoupdate?: number;
+    update?: number;
   }>;
   /** Microsoft Edge side-panel preferred width */
   edge_side_panel?: { preferred_width?: number };
@@ -195,10 +196,11 @@ export default function manifest(): FullManifest {
             label: "Wahala Stress Widget preview",
           },
         ],
+        template: "/widgets/stress-widget.json",
         ms_ac_template: "/widgets/stress-widget.json",
         data: "/widgets/stress-widget-data.json",
         type: "application/json",
-        autoupdate: 1800, // Update every 30 minutes
+        update: 1800, // Update every 30 minutes
       },
     ],
 
@@ -215,7 +217,8 @@ export default function manifest(): FullManifest {
     // Scope extensions (experimental — extend PWA trust to subdomain/domain if deployed)
     scope_extensions: [
       { origin: "https://wahala-tracker.vercel.app" },
-      { origin: "https://*.wahalatracker.com" },
+      { origin: "https://wahalatracker.com" },
+      { origin: "https://app.wahalatracker.com" },
     ],
   };
 }
