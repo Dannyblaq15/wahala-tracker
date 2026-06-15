@@ -14,6 +14,9 @@ type FullManifest = MetadataRoute.Manifest & {
     description?: string;
     short_name?: string;
     ms_ac_template?: string;
+    data?: string;
+    type?: string;
+    autoupdate?: number;
   }>;
   /** Microsoft Edge side-panel preferred width */
   edge_side_panel?: { preferred_width?: number };
@@ -145,7 +148,18 @@ export default function manifest(): FullManifest {
 
     // Web app has no native counterpart; prefer_related_applications: false
     prefer_related_applications: false,
-    related_applications: [],
+    related_applications: [
+      {
+        platform: "play",
+        url: "https://play.google.com/store/apps/details?id=com.wahala.tracker",
+        id: "com.wahala.tracker",
+      },
+      {
+        platform: "itunes",
+        url: "https://apps.apple.com/app/wahala-tracker/id1662495830",
+        id: "1662495830",
+      },
+    ],
 
     // Share-target: accept shared links/text into the dashboard
     share_target: {
@@ -181,6 +195,10 @@ export default function manifest(): FullManifest {
             label: "Wahala Stress Widget preview",
           },
         ],
+        ms_ac_template: "/widgets/stress-widget.json",
+        data: "/widgets/stress-widget-data.json",
+        type: "application/json",
+        autoupdate: 1800, // Update every 30 minutes
       },
     ],
 
@@ -194,7 +212,10 @@ export default function manifest(): FullManifest {
       new_note_url: "/dashboard",
     },
 
-    // Scope extensions (experimental — extend PWA trust to subdomain if deployed)
-    scope_extensions: [],
+    // Scope extensions (experimental — extend PWA trust to subdomain/domain if deployed)
+    scope_extensions: [
+      { origin: "https://wahala-tracker.vercel.app" },
+      { origin: "https://*.wahalatracker.com" },
+    ],
   };
 }
