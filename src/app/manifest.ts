@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
-// Extend the Next.js manifest type with fields not yet in the official typings
-type FullManifest = MetadataRoute.Manifest & {
+type FullManifest = Omit<MetadataRoute.Manifest, "display_override"> & {
+  display_override?: string[];
   /** IARC content rating certificate ID (obtain from https://www.globalratings.com/) */
   iarc_rating_id?: string;
   /** Windows 11 / Edge widget definitions */
@@ -34,11 +34,6 @@ export default function manifest(): FullManifest {
     short_name: "Wahala",
     start_url: "/?source=pwa",
     icons: [
-      {
-        src: "/favicon.ico",
-        type: "image/x-icon",
-        sizes: "16x16 32x32",
-      },
       {
         src: "/icon-192.png",
         type: "image/png",
@@ -122,7 +117,7 @@ export default function manifest(): FullManifest {
       },
     ],
 
-    display_override: ["window-controls-overlay", "standalone", "minimal-ui"],
+    display_override: ["tabbed", "window-controls-overlay", "standalone", "minimal-ui"],
 
     launch_handler: {
       client_mode: ["navigate-existing", "auto"],
@@ -218,16 +213,5 @@ export default function manifest(): FullManifest {
     note_taking: {
       new_note_url: "/dashboard",
     },
-
-    // Scope extensions — each listed origin MUST host
-    // /.well-known/web-app-origin-association to confirm the trust.
-    //
-    // This app's own Vercel deployment is self-hosted so it can serve
-    // the association file (see src/app/.well-known/web-app-origin-association/route.ts).
-    //
-    // Only list origins you CONTROL — wildcards are not supported.
-    scope_extensions: [
-      { origin: "https://wahala-tracker.vercel.app" },
-    ],
   };
 }
