@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     startupImage: ["/apple-touch-icon.png"],
   },
   applicationName: "Wahala Tracker",
+  manifest: "/manifest.json",
   formatDetection: {
     telephone: false,
   },
