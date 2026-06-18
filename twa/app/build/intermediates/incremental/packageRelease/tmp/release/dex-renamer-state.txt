@@ -1,0 +1,4 @@
+#Thu Jun 18 17:16:54 WAT 2026
+base.0=/Users/mac/wahala-tracker/twa/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

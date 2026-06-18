@@ -1,0 +1,96 @@
+{
+  "packageId": "app.vercel.wahala_tracker.twa",
+  "host": "wahala-tracker.vercel.app",
+  "name": "Wahala Tracker",
+  "launcherName": "Wahala",
+  "display": "standalone",
+  "themeColor": "#008751",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#0D0D0D",
+  "enableNotifications": true,
+  "startUrl": "/?source=pwa",
+  "iconUrl": "https://wahala-tracker.vercel.app/icon-512.png",
+  "maskableIconUrl": "https://wahala-tracker.vercel.app/icon-512-maskable.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/Users/mac/wahala-tracker/twa/android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "2",
+  "appVersionCode": 2,
+  "shortcuts": [
+    {
+      "name": "Log Wahala",
+      "shortName": "Log",
+      "url": "https://wahala-tracker.vercel.app/dashboard",
+      "chosenIconUrl": "https://wahala-tracker.vercel.app/icon-192.png"
+    },
+    {
+      "name": "Analytics",
+      "shortName": "Stats",
+      "url": "https://wahala-tracker.vercel.app/analytics",
+      "chosenIconUrl": "https://wahala-tracker.vercel.app/icon-192.png"
+    },
+    {
+      "name": "My Profile",
+      "shortName": "Profile",
+      "url": "https://wahala-tracker.vercel.app/profile",
+      "chosenIconUrl": "https://wahala-tracker.vercel.app/icon-192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://wahala-tracker.vercel.app/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://wahala-tracker.vercel.app/",
+  "minSdkVersion": 21,
+  "shareTarget": {
+    "action": "https://wahala-tracker.vercel.app/dashboard",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "orientation": "any",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [
+    {
+      "protocol": "web+wahala",
+      "url": "https://wahala-tracker.vercel.app/dashboard?source=%s"
+    }
+  ],
+  "fileHandlers": [
+    {
+      "actionUrl": "https://wahala-tracker.vercel.app/dashboard",
+      "mimeTypes": [
+        "application/json",
+        "text/plain"
+      ]
+    }
+  ],
+  "launchHandlerClientMode": [
+    "navigate-existing",
+    "auto"
+  ],
+  "displayOverride": [
+    "tabbed",
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "appVersion": "2"
+}

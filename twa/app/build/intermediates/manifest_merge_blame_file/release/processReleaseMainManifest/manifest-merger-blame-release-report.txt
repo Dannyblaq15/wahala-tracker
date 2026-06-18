@@ -1,0 +1,475 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3    Copyright 2019 Google Inc. All Rights Reserved.
+4
+5     Licensed under the Apache License, Version 2.0 (the "License");
+6     you may not use this file except in compliance with the License.
+7     You may obtain a copy of the License at
+8
+9         http://www.apache.org/licenses/LICENSE-2.0
+10
+11     Unless required by applicable law or agreed to in writing, software
+12     distributed under the License is distributed on an "AS IS" BASIS,
+13     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14     See the License for the specific language governing permissions and
+15     limitations under the License.
+16-->
+17<!--
+18 The "package" attribute is rewritten by the Gradle build with the value of applicationId.
+19     It is still required here, as it is used to derive paths, for instance when referring
+20     to an Activity by ".MyActivity" instead of the full name. If more Activities are added to the
+21     application, the package attribute will need to reflect the correct path in order to use
+22     the abbreviated format.
+23-->
+24<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+25    package="app.vercel.wahala_tracker.twa"
+26    android:versionCode="2"
+27    android:versionName="2" >
+28
+29    <uses-sdk
+30        android:minSdkVersion="21"
+31        android:targetSdkVersion="35" />
+32
+33    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+33-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:26:9-80
+33-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:26:26-78
+34
+35    <queries>
+35-->[com.google.androidbrowserhelper:androidbrowserhelper:2.6.2] /Users/mac/.gradle/caches/8.14.3/transforms/431fae5c3ba9033e4547e4a862a395af/transformed/androidbrowserhelper-2.6.2/AndroidManifest.xml:22:5-30:15
+36        <intent>
+36-->[com.google.androidbrowserhelper:androidbrowserhelper:2.6.2] /Users/mac/.gradle/caches/8.14.3/transforms/431fae5c3ba9033e4547e4a862a395af/transformed/androidbrowserhelper-2.6.2/AndroidManifest.xml:23:9-29:18
+37            <action android:name="android.intent.action.VIEW" />
+37-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:17-68
+37-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:25-66
+38
+39            <category android:name="android.intent.category.BROWSABLE" />
+39-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:17-77
+39-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:27-75
+40
+41            <data android:scheme="https" />
+41-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+41-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:173:23-45
+42        </intent>
+43    </queries>
+44
+45    <permission
+45-->[androidx.core:core:1.13.0] /Users/mac/.gradle/caches/8.14.3/transforms/ba099de253a98971818a530f3ea5696a/transformed/core-1.13.0/AndroidManifest.xml:22:5-24:47
+46        android:name="app.vercel.wahala_tracker.twa.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+46-->[androidx.core:core:1.13.0] /Users/mac/.gradle/caches/8.14.3/transforms/ba099de253a98971818a530f3ea5696a/transformed/core-1.13.0/AndroidManifest.xml:23:9-81
+47        android:protectionLevel="signature" />
+47-->[androidx.core:core:1.13.0] /Users/mac/.gradle/caches/8.14.3/transforms/ba099de253a98971818a530f3ea5696a/transformed/core-1.13.0/AndroidManifest.xml:24:9-44
+48
+49    <uses-permission android:name="app.vercel.wahala_tracker.twa.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+49-->[androidx.core:core:1.13.0] /Users/mac/.gradle/caches/8.14.3/transforms/ba099de253a98971818a530f3ea5696a/transformed/core-1.13.0/AndroidManifest.xml:26:5-97
+49-->[androidx.core:core:1.13.0] /Users/mac/.gradle/caches/8.14.3/transforms/ba099de253a98971818a530f3ea5696a/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
+50
+51    <application
+51-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:35:5-247:19
+52        android:name="app.vercel.wahala_tracker.twa.Application"
+52-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:36:9-35
+53        android:allowBackup="true"
+53-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:37:9-35
+54        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+54-->[androidx.core:core:1.13.0] /Users/mac/.gradle/caches/8.14.3/transforms/ba099de253a98971818a530f3ea5696a/transformed/core-1.13.0/AndroidManifest.xml:28:18-86
+55        android:extractNativeLibs="true"
+56        android:icon="@mipmap/ic_launcher"
+56-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:38:9-43
+57        android:label="@string/appName"
+57-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:39:9-40
+58        android:manageSpaceActivity="com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity"
+58-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:41:9-105
+59        android:supportsRtl="true"
+59-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:43:9-35
+60        android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+60-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:44:9-68
+61        <meta-data
+61-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:46:9-48:58
+62            android:name="asset_statements"
+62-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:47:13-44
+63            android:resource="@string/assetStatements" />
+63-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:48:13-55
+64        <meta-data
+64-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:51:13-53:58
+65            android:name="web_manifest_url"
+65-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:52:17-48
+66            android:value="@string/webManifestUrl" />
+66-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:53:17-55
+67        <meta-data
+67-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:56:9-58:52
+68            android:name="twa_generator"
+68-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:57:13-41
+69            android:value="@string/generatorApp" />
+69-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:58:13-49
+70
+71        <activity
+71-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:65:13-76:24
+72            android:name="com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity"
+72-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:65:23-104
+73            android:enabled="true"
+73-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:67:17-39
+74            android:excludeFromRecents="true"
+74-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:68:17-50
+75            android:exported="false" >
+75-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:66:17-41
+76            <meta-data
+76-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:69:17-71:57
+77                android:name="android.support.customtabs.trusted.MANAGE_SPACE_URL"
+77-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:70:21-87
+78                android:value="@string/launchUrl" />
+78-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:71:21-54
+79
+80            <intent-filter>
+80-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:72:17-75:33
+81                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+81-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:73:21-92
+81-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:73:29-89
+82
+83                <category android:name="android.intent.category.DEFAULT" />
+83-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:21-80
+83-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:31-77
+84            </intent-filter>
+85        </activity>
+86        <activity
+86-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:79:9-189:20
+87            android:name="app.vercel.wahala_tracker.twa.LauncherActivity"
+87-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:79:19-50
+88            android:alwaysRetainTaskState="true"
+88-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:80:13-49
+89            android:exported="true"
+89-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:82:13-36
+90            android:label="@string/launcherName" >
+90-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:81:13-49
+91            <meta-data
+91-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:83:13-84:53
+92                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+92-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:83:24-85
+93                android:value="@string/launchUrl" />
+93-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:84:17-50
+94            <meta-data
+94-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:86:13-88:58
+95                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR"
+95-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:87:17-83
+96                android:resource="@color/colorPrimary" />
+96-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:88:17-55
+97            <meta-data
+97-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:91:17-93:71
+98                android:name="android.support.customtabs.trusted.LAUNCH_HANDLER_CLIENT_MODE"
+98-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:92:21-97
+99                android:value="@string/launchHandlerClientMode" />
+99-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:93:21-68
+100            <meta-data
+100-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:96:13-98:62
+101                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR_DARK"
+101-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:97:17-88
+102                android:resource="@color/colorPrimaryDark" />
+102-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:98:17-59
+103            <meta-data
+103-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:100:13-102:61
+104                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR"
+104-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:101:17-87
+105                android:resource="@color/navigationColor" />
+105-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:102:17-58
+106            <meta-data
+106-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:104:13-106:65
+107                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR_DARK"
+107-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:105:17-92
+108                android:resource="@color/navigationColorDark" />
+108-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:106:17-62
+109            <meta-data
+109-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:108:13-110:68
+110                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR"
+110-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:109:17-84
+111                android:resource="@color/navigationDividerColor" />
+111-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:110:17-65
+112            <meta-data
+112-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:112:13-114:72
+113                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR_DARK"
+113-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:113:17-89
+114                android:resource="@color/navigationDividerColorDark" />
+114-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:114:17-69
+115            <meta-data
+115-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:116:13-117:54
+116                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
+116-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:116:24-95
+117                android:resource="@drawable/splash" />
+117-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:117:17-52
+118            <meta-data
+118-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:119:13-120:60
+119                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
+119-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:119:24-104
+120                android:resource="@color/backgroundColor" />
+120-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:120:17-58
+121            <meta-data
+121-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:122:13-123:71
+122                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
+122-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:122:24-105
+123                android:value="@integer/splashScreenFadeOutDuration" />
+123-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:123:17-69
+124            <meta-data
+124-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:125:13-126:60
+125                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+125-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:125:24-97
+126                android:value="@string/providerAuthority" />
+126-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:126:17-58
+127            <meta-data
+127-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:128:13-97
+128                android:name="android.app.shortcuts"
+128-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:128:24-60
+129                android:resource="@xml/shortcuts" />
+129-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:128:61-94
+130            <meta-data
+130-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:130:13-131:56
+131                android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY"
+131-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:130:24-91
+132                android:value="@string/fallbackType" />
+132-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:131:17-53
+133            <meta-data
+133-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:134:17-136:61
+134                android:name="android.support.customtabs.trusted.METADATA_SHARE_TARGET"
+134-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:135:21-92
+135                android:resource="@string/shareTarget" />
+135-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:136:21-59
+136            <meta-data
+136-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:141:13-142:54
+137                android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
+137-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:141:24-92
+138                android:value="@string/orientation" />
+138-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:142:17-52
+139            <meta-data
+139-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:147:17-149:66
+140                android:name="android.support.customtabs.trusted.DISPLAY_OVERRIDE"
+140-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:148:21-87
+141                android:resource="@array/display_override" />
+141-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:149:21-63
+142
+143            <intent-filter>
+143-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:153:17-161:33
+144                <action android:name="android.intent.action.SEND" />
+144-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:155:25-77
+144-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:155:33-74
+145
+146                <category android:name="android.intent.category.DEFAULT" />
+146-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:21-80
+146-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:31-77
+147
+148                <data android:mimeType="text/plain" />
+148-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+148-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:31-60
+149            </intent-filter>
+150            <intent-filter>
+150-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:164:13-167:29
+151                <action android:name="android.intent.action.MAIN" />
+151-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:165:17-69
+151-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:165:25-66
+152
+153                <category android:name="android.intent.category.LAUNCHER" />
+153-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:166:17-77
+153-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:166:27-74
+154            </intent-filter>
+155            <intent-filter android:autoVerify="true" >
+155-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:169:13-177:29
+155-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:169:28-53
+156                <action android:name="android.intent.action.VIEW" />
+156-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:17-68
+156-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:25-66
+157
+158                <category android:name="android.intent.category.DEFAULT" />
+158-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:21-80
+158-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:31-77
+159                <category android:name="android.intent.category.BROWSABLE" />
+159-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:17-77
+159-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:27-75
+160
+161                <data
+161-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+162                    android:host="@string/hostName"
+162-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:174:21-52
+163                    android:scheme="https" />
+163-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:173:23-45
+164            </intent-filter>
+165            <intent-filter>
+165-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:182:17-187:27
+166                <action android:name="android.intent.action.VIEW" />
+166-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:17-68
+166-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:25-66
+167
+168                <category android:name="android.intent.category.DEFAULT" />
+168-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:21-80
+168-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:31-77
+169                <category android:name="android.intent.category.BROWSABLE" />
+169-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:17-77
+169-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:27-75
+170
+171                <data android:scheme="web+wahala" />
+171-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+171-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:173:23-45
+172            </intent-filter>
+173        </activity>
+174
+175        <activity-alias
+175-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:229:5-244:22
+176            android:name="app.vercel.wahala_tracker.twa.FileHandlingActivity0"
+176-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:230:9-45
+177            android:exported="true"
+177-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:232:9-32
+178            android:targetActivity="app.vercel.wahala_tracker.twa.LauncherActivity" >
+178-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:231:9-50
+179            <meta-data
+179-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:233:9-234:62
+180                android:name="android.support.customtabs.trusted.FILE_HANDLING_ACTION_URL"
+180-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:233:20-94
+181                android:value="@string/fileHandlingActionUrl0" />
+181-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:234:13-59
+182
+183            <intent-filter>
+183-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:235:9-243:25
+184                <action android:name="android.intent.action.VIEW" />
+184-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:17-68
+184-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:170:25-66
+185
+186                <category android:name="android.intent.category.DEFAULT" />
+186-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:21-80
+186-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:31-77
+187                <category android:name="android.intent.category.BROWSABLE" />
+187-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:17-77
+187-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:172:27-75
+188
+189                <data android:scheme="content" />
+189-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+189-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:173:23-45
+190                <data android:mimeType="application/json" />
+190-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+190-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:31-60
+191                <data android:mimeType="text/plain" />
+191-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:25-63
+191-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:159:31-60
+192            </intent-filter>
+193        </activity-alias>
+194
+195        <activity android:name="com.google.androidbrowserhelper.trusted.FocusActivity" />
+195-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:191:9-90
+195-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:191:19-87
+196        <activity
+196-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:193:9-194:62
+197            android:name="com.google.androidbrowserhelper.trusted.WebViewFallbackActivity"
+197-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:193:19-97
+198            android:configChanges="orientation|screenSize" />
+198-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:194:13-59
+199
+200        <provider
+200-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:196:9-204:20
+201            android:name="androidx.core.content.FileProvider"
+201-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:197:13-62
+202            android:authorities="@string/providerAuthority"
+202-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:198:13-60
+203            android:exported="false"
+203-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:200:13-37
+204            android:grantUriPermissions="true" >
+204-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:199:13-47
+205            <meta-data
+205-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:201:13-203:53
+206                android:name="android.support.FILE_PROVIDER_PATHS"
+206-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:202:17-67
+207                android:resource="@xml/filepaths" />
+207-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:203:17-50
+208        </provider>
+209
+210        <service
+210-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:206:9-221:19
+211            android:name="app.vercel.wahala_tracker.twa.DelegationService"
+211-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:207:13-46
+212            android:enabled="@bool/enableNotification"
+212-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:208:13-55
+213            android:exported="@bool/enableNotification" >
+213-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:209:13-56
+214            <meta-data
+214-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:212:17-214:73
+215                android:name="android.support.customtabs.trusted.SMALL_ICON"
+215-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:213:21-81
+216                android:resource="@drawable/ic_notification_icon" />
+216-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:214:21-70
+217
+218            <intent-filter>
+218-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:217:13-220:29
+219                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
+219-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:218:17-105
+219-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:218:25-103
+220
+221                <category android:name="android.intent.category.DEFAULT" />
+221-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:21-80
+221-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:74:31-77
+222            </intent-filter>
+223        </service>
+224
+225        <activity android:name="com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity" />
+225-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:224:13-118
+225-->/Users/mac/wahala-tracker/twa/app/src/main/AndroidManifest.xml:224:23-115
+226
+227        <provider
+227-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+228            android:name="androidx.startup.InitializationProvider"
+228-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+229            android:authorities="app.vercel.wahala_tracker.twa.androidx-startup"
+229-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+230            android:exported="false" >
+230-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+231            <meta-data
+231-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+232                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+232-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+233                android:value="androidx.startup" />
+233-->[androidx.emoji2:emoji2:1.3.0] /Users/mac/.gradle/caches/8.14.3/transforms/5d9da79406af34e88543f8450b209896/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+234            <meta-data
+234-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/mac/.gradle/caches/8.14.3/transforms/229f1c0f04f04aa6f714ebef83d6a97a/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+235                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+235-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/mac/.gradle/caches/8.14.3/transforms/229f1c0f04f04aa6f714ebef83d6a97a/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+236                android:value="androidx.startup" />
+236-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/mac/.gradle/caches/8.14.3/transforms/229f1c0f04f04aa6f714ebef83d6a97a/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+237            <meta-data
+237-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+238                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+238-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+239                android:value="androidx.startup" />
+239-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+240        </provider>
+241
+242        <receiver
+242-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+243            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+243-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+244            android:directBootAware="false"
+244-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+245            android:enabled="true"
+245-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+246            android:exported="true"
+246-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+247            android:permission="android.permission.DUMP" >
+247-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+248            <intent-filter>
+248-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+249                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+249-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+249-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+250            </intent-filter>
+251            <intent-filter>
+251-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+252                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+252-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+252-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+253            </intent-filter>
+254            <intent-filter>
+254-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+255                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+255-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+255-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+256            </intent-filter>
+257            <intent-filter>
+257-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+258                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+258-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+258-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/mac/.gradle/caches/8.14.3/transforms/44173f82c47f995cdf807eaad9de497b/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+259            </intent-filter>
+260        </receiver>
+261    </application>
+262
+263</manifest>
