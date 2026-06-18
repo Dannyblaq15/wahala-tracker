@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.wahala_tracker.twa",
+      "sha256_cert_fingerprints": [
+        "77:B7:F6:69:7D:4B:7A:3F:D6:0C:C1:71:29:18:4A:CA:AC:38:3D:A9:EA:E3:BB:3B:E2:9D:1F:18:11:6A:40:F5"
+      ]
+    }
+  }
+]
