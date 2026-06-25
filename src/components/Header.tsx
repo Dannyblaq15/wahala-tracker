@@ -14,6 +14,20 @@ export default function Header() {
   const router = useRouter();
   const { notify } = useNotification();
 
+  const [isPWA, setIsPWA] = React.useState(false);
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('source');
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                        (window.navigator as any).standalone === true ||
+                        source === 'pwa' ||
+                        (typeof document !== 'undefined' && document.referrer.includes('android-app://'));
+    setIsPWA(isStandalone);
+  }, []);
+
+  if (isPWA) return null;
+
   const handleLogout = async () => {
     await signOut(auth);
     await fetch('/api/auth/session', { method: 'DELETE' });

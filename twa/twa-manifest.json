@@ -20,8 +20,8 @@
     "path": "/Users/mac/wahala-tracker/twa/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "2",
-  "appVersionCode": 2,
+  "appVersionName": "3",
+  "appVersionCode": 3,
   "shortcuts": [
     {
       "name": "Log Wahala",
@@ -92,5 +92,5 @@
     "standalone",
     "minimal-ui"
   ],
-  "appVersion": "2"
+  "appVersion": "3"
 }
